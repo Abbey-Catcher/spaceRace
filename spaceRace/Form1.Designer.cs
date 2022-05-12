@@ -74,7 +74,7 @@
             this.p2ScoreLabel.Name = "p2ScoreLabel";
             this.p2ScoreLabel.Size = new System.Drawing.Size(311, 78);
             this.p2ScoreLabel.TabIndex = 5;
-            this.p2ScoreLabel.Text = "p2Score";
+            this.p2ScoreLabel.Text = "p2ScoreLabel";
             this.p2ScoreLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // p1ScoreLabel

@@ -29,19 +29,15 @@ namespace spaceRace
         Rectangle player2 = new Rectangle(100, 540, 10, 60);
         int playerSpeed = 10;
 
-        List<Rectangle> balls = new List<Rectangle>();
+        List<Rectangle> astroids = new List<Rectangle>();
         List<int> astroidSpeeds = new List<int>();
         int astroidSize = 10;
 
-        bool leftDown = false;
-        bool rightDown = false;
-        bool upDown = false;
-        bool downDown = false;
+        bool upArrowDown = false;
+        bool downArrowDown = false;
 
         bool wDown = false;
         bool sDown = false;
-        bool aDown = false;
-        bool dDown = false;
 
         int p1Score = 0;
         int p2Score = 0;
@@ -158,16 +154,6 @@ namespace spaceRace
                 player1.Y += playerSpeed;
             }
 
-            if (aDown == true && player1.X > 0)
-            {
-                player1.X -= playerSpeed;
-            }
-
-            if (dDown == true && player1.X < this.Width - player1.Width)
-            {
-                player1.X += playerSpeed;
-            }
-
             //move player 2 
             if (upArrowDown == true && player2.Y > 0)
             {
@@ -179,20 +165,84 @@ namespace spaceRace
                 player2.Y += playerSpeed;
             }
 
-            if (leftArrowDown == true && player2.X > 0)
+            for (int i = 0; i < astroids.Count(); i++)
             {
-                player2.X -= playerSpeed;
+                //find the new postion of y based on speed 
+                int y = astroids[i].Y + astroidSpeeds[i];
+
+                //replace the rectangle in the list with updated one using new y 
+                astroids[i] = new Rectangle(astroids[i].X, y, astroidSize, astroidSize);
             }
 
-            if (rightArrowDown == true && player2.X < this.Width - player2.Width)
+            //check to see if a new ball should be created 
+            randValue = randGen.Next(0, 101);
+
+            //check if ball is below play area and remove it if it is 
+            for (int i = 0; i < astroids.Count(); i++)
             {
-                player2.X += playerSpeed;
+                if (astroids[i].Y > this.Height - astroidSize)
+                {
+                    astroids.RemoveAt(i);
+                    astroidSpeeds.RemoveAt(i);
+                }
             }
+
+            //check collision of ball and paddle 
+            for (int i = 0; i < astroids.Count(); i++)
+            {
+                if (player1.IntersectsWith(astroids[i]))
+                {
+                    player1.Y = this.Width - player1.Width;
+                    player1.X = 50;
+
+                    //astroids.RemoveAt(i);
+                    //astroidSpeeds.RemoveAt(i);
+                }
+            }
+
+            if (p1Score == 3 || p2Score == 3)
+            {
+                gameTimer.Enabled = false;
+                gameState = "over";
+            }
+
+            Refresh();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            if (gameState == "waiting")
+            {
+                titleLabel.Text = "SPACE RACE";
+                subTitleLabel.Text = "Press Space Bar to Start or Escape to Exit";
+            }
 
+            else if (gameState == "running")
+            {
+                //update labels 
+                p1ScoreLabel.Text = $"{p1Score}";
+                p2ScoreLabel.Text = $"{p2Score}";
+
+                //draw hero 
+                e.Graphics.FillRectangle(whiteBrush, player1);
+                e.Graphics.FillRectangle(whiteBrush, player2);
+
+                //draw balls 
+                for (int i = 0; i < astroids.Count(); i++)
+                {
+                    e.Graphics.FillRectangle(greenBrush, astroids[i]);
+                }
+            }
+            else if (gameState == "over")
+            {
+                p1ScoreLabel.Text = "";
+                p2ScoreLabel.Text = "";
+
+                titleLabel.Text = "GAME OVER";
+
+                subTitleLabel.Text = $"Player {} won!";
+                subTitleLabel.Text += "\nPress Space Bar to Start or Escape to Exit";
+            }
         }
     }
 }
