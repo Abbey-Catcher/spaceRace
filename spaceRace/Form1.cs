@@ -25,9 +25,9 @@ namespace spaceRace
         //title screen and game over screen
         //Sounds
 
-        Rectangle player1 = new Rectangle(50, 540, 10, 60);
-        Rectangle player2 = new Rectangle(100, 540, 10, 60);
-        int playerSpeed = 10;
+        Rectangle player1 = new Rectangle(250, 300, 10, 10);
+        Rectangle player2 = new Rectangle(550, 300, 10, 10);
+        int playerSpeed = 5;
 
         List<Rectangle> astroids = new List<Rectangle>();
         List<int> astroidSpeeds = new List<int>();
@@ -42,7 +42,7 @@ namespace spaceRace
         int p1Score = 0;
         int p2Score = 0;
 
-        SolidBrush greenBrush = new SolidBrush(Color.Green);
+        SolidBrush blueBrush = new SolidBrush(Color.PaleTurquoise);
         SolidBrush goldBrush = new SolidBrush(Color.Gold);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
 
@@ -63,6 +63,10 @@ namespace spaceRace
             p1ScoreLabel.Visible = true;
             p2ScoreLabel.Visible = true;
 
+            //player locations set to bottom of screen
+            player1.Location = new Point(250, this.Height - player1.Height);
+            player2.Location = new Point(550, this.Height - player2.Height);
+
             gameTimer.Enabled = true;
             gameState = "running";
         }
@@ -71,29 +75,17 @@ namespace spaceRace
         {
             switch (e.KeyCode)
             {
-                case Keys.Left:
-                    leftDown = true;
-                    break;
-                case Keys.Right:
-                    rightDown = true;
-                    break;
                 case Keys.Up:
-                    upDown = true;
+                    upArrowDown = true;
                     break;
                 case Keys.Down:
-                    downDown = true;
+                    downArrowDown = true;
                     break;
                 case Keys.W:
                     wDown = true;
                     break;
-                case Keys.A:
-                    aDown = true;
-                    break;
                 case Keys.S:
                     sDown = true;
-                    break;
-                case Keys.D:
-                    dDown = true;
                     break;
                 case Keys.Space:
                     if (gameState == "waiting" || gameState == "over")
@@ -114,29 +106,17 @@ namespace spaceRace
         {
             switch (e.KeyCode)
             {
-                case Keys.Left:
-                    leftDown = false;
-                    break;
-                case Keys.Right:
-                    rightDown = false;
-                    break;
                 case Keys.Up:
-                    upDown = false;
+                    upArrowDown = false;
                     break;
                 case Keys.Down:
-                    downDown = false;
+                    downArrowDown = false;
                     break;
                 case Keys.W:
                     wDown = false;
                     break;
-                case Keys.A:
-                    aDown = false;
-                    break;
                 case Keys.S:
                     sDown = false;
-                    break;
-                case Keys.D:
-                    dDown = false;
                     break;
             }
         }
@@ -165,17 +145,45 @@ namespace spaceRace
                 player2.Y += playerSpeed;
             }
 
+            //move astroids
             for (int i = 0; i < astroids.Count(); i++)
             {
                 //find the new postion of y based on speed 
-                int y = astroids[i].Y + astroidSpeeds[i];
+                int x = astroids[i].X + astroidSpeeds[i];
 
                 //replace the rectangle in the list with updated one using new y 
-                astroids[i] = new Rectangle(astroids[i].X, y, astroidSize, astroidSize);
+                astroids[i] = new Rectangle(x, astroids[i].Y, astroidSize, astroidSize);
             }
 
-            //check to see if a new ball should be created 
+            //if player reaches top of screen, reset position and add point
+            if (player1.Y == 0)
+            {
+                player1.Y = this.Height - player1.Height;
+                p1Score++;
+                p1ScoreLabel.Text = $"{p1Score}";
+            }
+            else if (player2.Y == 0)
+            {
+                player2.Y = this.Height - player2.Height;
+                p2Score++;
+                p2ScoreLabel.Text = $"{p2Score}";
+            }
+
+            //check to see if a new astroid should be created 
             randValue = randGen.Next(0, 101);
+            
+            if (randValue < 10) //left
+            {
+                int y = randGen.Next(15, this.Height - 20);
+                astroids.Add(new Rectangle(-10, y, astroidSize, astroidSize));
+                astroidSpeeds.Add(7);
+            }
+            else if (randValue < 20) //right
+            {
+                int y = randGen.Next(15, this.Height - 20);
+                astroids.Add(new Rectangle(this.Width, y, astroidSize, astroidSize));
+                astroidSpeeds.Add(-7);
+            }
 
             //check if ball is below play area and remove it if it is 
             for (int i = 0; i < astroids.Count(); i++)
@@ -187,19 +195,26 @@ namespace spaceRace
                 }
             }
 
-            //check collision of ball and paddle 
+            //check collision of astroids and player 
             for (int i = 0; i < astroids.Count(); i++)
             {
                 if (player1.IntersectsWith(astroids[i]))
                 {
-                    player1.Y = this.Width - player1.Width;
-                    player1.X = 50;
+                    player1.Y = this.Height - player1.Height;
+
+                    //astroids.RemoveAt(i);
+                    //astroidSpeeds.RemoveAt(i);
+                }
+                else if (player2.IntersectsWith(astroids[i]))
+                {
+                    player2.Y = this.Height - player2.Height;
 
                     //astroids.RemoveAt(i);
                     //astroidSpeeds.RemoveAt(i);
                 }
             }
 
+            //if a player gets 3 points, game ends
             if (p1Score == 3 || p2Score == 3)
             {
                 gameTimer.Enabled = false;
@@ -216,21 +231,20 @@ namespace spaceRace
                 titleLabel.Text = "SPACE RACE";
                 subTitleLabel.Text = "Press Space Bar to Start or Escape to Exit";
             }
-
             else if (gameState == "running")
             {
                 //update labels 
                 p1ScoreLabel.Text = $"{p1Score}";
                 p2ScoreLabel.Text = $"{p2Score}";
 
-                //draw hero 
+                //draw players 
                 e.Graphics.FillRectangle(whiteBrush, player1);
                 e.Graphics.FillRectangle(whiteBrush, player2);
 
-                //draw balls 
+                //draw astroids 
                 for (int i = 0; i < astroids.Count(); i++)
                 {
-                    e.Graphics.FillRectangle(greenBrush, astroids[i]);
+                    e.Graphics.FillRectangle(blueBrush, astroids[i]);
                 }
             }
             else if (gameState == "over")
@@ -240,7 +254,15 @@ namespace spaceRace
 
                 titleLabel.Text = "GAME OVER";
 
-                subTitleLabel.Text = $"Player {} won!";
+                if (p1Score == 3)
+                {
+                    subTitleLabel.Text = "Player 1 won!";
+                }
+                else if (p2Score == 3)
+                {
+                    subTitleLabel.Text = "Player 2 won!";
+                }
+
                 subTitleLabel.Text += "\nPress Space Bar to Start or Escape to Exit";
             }
         }

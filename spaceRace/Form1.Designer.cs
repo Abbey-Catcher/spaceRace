@@ -74,7 +74,6 @@
             this.p2ScoreLabel.Name = "p2ScoreLabel";
             this.p2ScoreLabel.Size = new System.Drawing.Size(311, 78);
             this.p2ScoreLabel.TabIndex = 5;
-            this.p2ScoreLabel.Text = "p2ScoreLabel";
             this.p2ScoreLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // p1ScoreLabel
@@ -86,7 +85,6 @@
             this.p1ScoreLabel.Name = "p1ScoreLabel";
             this.p1ScoreLabel.Size = new System.Drawing.Size(311, 78);
             this.p1ScoreLabel.TabIndex = 6;
-            this.p1ScoreLabel.Text = "p1ScoreLabel";
             this.p1ScoreLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Form1
@@ -99,6 +97,7 @@
             this.Controls.Add(this.p2ScoreLabel);
             this.Controls.Add(this.subTitleLabel);
             this.Controls.Add(this.titleLabel);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Space Race";
