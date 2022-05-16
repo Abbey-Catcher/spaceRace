@@ -31,7 +31,7 @@ namespace spaceRace
 
         List<Rectangle> astroids = new List<Rectangle>();
         List<int> astroidSpeeds = new List<int>();
-        int astroidSize = 10;
+        int astroidSize = 8;
 
         bool upArrowDown = false;
         bool downArrowDown = false;
@@ -42,8 +42,8 @@ namespace spaceRace
         int p1Score = 0;
         int p2Score = 0;
 
-        SolidBrush blueBrush = new SolidBrush(Color.PaleTurquoise);
-        SolidBrush goldBrush = new SolidBrush(Color.Gold);
+        SolidBrush blueBrush = new SolidBrush(Color.LightSteelBlue);
+        SolidBrush playerBrush = new SolidBrush(Color.Gainsboro);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
 
         Random randGen = new Random();
@@ -69,6 +69,14 @@ namespace spaceRace
 
             gameTimer.Enabled = true;
             gameState = "running";
+
+            //reset scores
+            p1Score = 0;
+            p2Score = 0;
+
+            //reset astroids
+            astroids.Clear();
+            astroidSpeeds.Clear();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -148,11 +156,11 @@ namespace spaceRace
             //move astroids
             for (int i = 0; i < astroids.Count(); i++)
             {
-                //find the new postion of y based on speed 
+                //find the new postion of x based on speed 
                 int x = astroids[i].X + astroidSpeeds[i];
 
-                //replace the rectangle in the list with updated one using new y 
-                astroids[i] = new Rectangle(x, astroids[i].Y, astroidSize, astroidSize);
+                //replace the rectangle in the list with updated one using new x 
+                astroids[i] = new Rectangle(x, astroids[i].Y, 20, astroidSize);
             }
 
             //if player reaches top of screen, reset position and add point
@@ -238,22 +246,27 @@ namespace spaceRace
                 p2ScoreLabel.Text = $"{p2Score}";
 
                 //draw players 
-                e.Graphics.FillRectangle(whiteBrush, player1);
-                e.Graphics.FillRectangle(whiteBrush, player2);
+                e.Graphics.FillRectangle(playerBrush, player1);
+                e.Graphics.FillRectangle(playerBrush, player2);
 
                 //draw astroids 
                 for (int i = 0; i < astroids.Count(); i++)
                 {
                     e.Graphics.FillRectangle(blueBrush, astroids[i]);
                 }
+
+                //draw center line
+                e.Graphics.FillRectangle(whiteBrush, 420, 0, 5, this.Height);
             }
             else if (gameState == "over")
             {
+                //clears labels
                 p1ScoreLabel.Text = "";
                 p2ScoreLabel.Text = "";
 
                 titleLabel.Text = "GAME OVER";
 
+                //if player won, says player_ won
                 if (p1Score == 3)
                 {
                     subTitleLabel.Text = "Player 1 won!";
