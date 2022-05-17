@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace spaceRace
 {
@@ -25,8 +26,8 @@ namespace spaceRace
         //title screen and game over screen
         //Sounds
 
-        Rectangle player1 = new Rectangle(250, 300, 10, 10);
-        Rectangle player2 = new Rectangle(550, 300, 10, 10);
+        Rectangle player1 = new Rectangle(250, 300, 50, 35);
+        Rectangle player2 = new Rectangle(550, 300, 50, 35);
         int playerSpeed = 5;
 
         List<Rectangle> astroids = new List<Rectangle>();
@@ -43,7 +44,6 @@ namespace spaceRace
         int p2Score = 0;
 
         SolidBrush blueBrush = new SolidBrush(Color.LightSteelBlue);
-        SolidBrush playerBrush = new SolidBrush(Color.Gainsboro);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
 
         Random randGen = new Random();
@@ -62,6 +62,10 @@ namespace spaceRace
             subTitleLabel.Text = "";
             p1ScoreLabel.Visible = true;
             p2ScoreLabel.Visible = true;
+
+            //play beginning sound
+            SoundPlayer beginningSound = new SoundPlayer(Properties.Resources.startGameSound);
+            beginningSound.Play();
 
             //player locations set to bottom of screen
             player1.Location = new Point(250, this.Height - player1.Height);
@@ -180,15 +184,15 @@ namespace spaceRace
             //check to see if a new astroid should be created 
             randValue = randGen.Next(0, 101);
             
-            if (randValue < 10) //left
+            if (randValue < 10) //astroids enter from left
             {
-                int y = randGen.Next(15, this.Height - 20);
+                int y = randGen.Next(15, this.Height - 40);
                 astroids.Add(new Rectangle(-10, y, astroidSize, astroidSize));
                 astroidSpeeds.Add(7);
             }
-            else if (randValue < 20) //right
+            else if (randValue < 20) //astroids enter from right
             {
-                int y = randGen.Next(15, this.Height - 20);
+                int y = randGen.Next(15, this.Height - 40);
                 astroids.Add(new Rectangle(this.Width, y, astroidSize, astroidSize));
                 astroidSpeeds.Add(-7);
             }
@@ -209,16 +213,10 @@ namespace spaceRace
                 if (player1.IntersectsWith(astroids[i]))
                 {
                     player1.Y = this.Height - player1.Height;
-
-                    //astroids.RemoveAt(i);
-                    //astroidSpeeds.RemoveAt(i);
                 }
                 else if (player2.IntersectsWith(astroids[i]))
                 {
                     player2.Y = this.Height - player2.Height;
-
-                    //astroids.RemoveAt(i);
-                    //astroidSpeeds.RemoveAt(i);
                 }
             }
 
@@ -226,6 +224,8 @@ namespace spaceRace
             if (p1Score == 3 || p2Score == 3)
             {
                 gameTimer.Enabled = false;
+                SoundPlayer endSound = new SoundPlayer(Properties.Resources.endSound);
+                endSound.Play();
                 gameState = "over";
             }
 
@@ -245,9 +245,9 @@ namespace spaceRace
                 p1ScoreLabel.Text = $"{p1Score}";
                 p2ScoreLabel.Text = $"{p2Score}";
 
-                //draw players 
-                e.Graphics.FillRectangle(playerBrush, player1);
-                e.Graphics.FillRectangle(playerBrush, player2);
+                //players visible
+                e.Graphics.DrawImage(Properties.Resources.playerShip, player1);
+                e.Graphics.DrawImage(Properties.Resources.playerShip, player2);
 
                 //draw astroids 
                 for (int i = 0; i < astroids.Count(); i++)

@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playerShip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\609336__kenneth-cooney__completed.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\459814__matrixxx__alien-05.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\361261__japanyoshithegamer__8-bit-spaceship-startup.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

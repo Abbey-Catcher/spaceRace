@@ -46,7 +46,7 @@
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.titleLabel.ForeColor = System.Drawing.Color.Cyan;
-            this.titleLabel.Location = new System.Drawing.Point(288, 131);
+            this.titleLabel.Location = new System.Drawing.Point(290, 143);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(243, 42);
             this.titleLabel.TabIndex = 3;
@@ -58,7 +58,7 @@
             this.subTitleLabel.BackColor = System.Drawing.Color.Transparent;
             this.subTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.subTitleLabel.ForeColor = System.Drawing.Color.Lime;
-            this.subTitleLabel.Location = new System.Drawing.Point(245, 260);
+            this.subTitleLabel.Location = new System.Drawing.Point(255, 256);
             this.subTitleLabel.Name = "subTitleLabel";
             this.subTitleLabel.Size = new System.Drawing.Size(311, 78);
             this.subTitleLabel.TabIndex = 4;
@@ -70,9 +70,9 @@
             this.p2ScoreLabel.BackColor = System.Drawing.Color.Transparent;
             this.p2ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.p2ScoreLabel.ForeColor = System.Drawing.Color.White;
-            this.p2ScoreLabel.Location = new System.Drawing.Point(450, 359);
+            this.p2ScoreLabel.Location = new System.Drawing.Point(639, 333);
             this.p2ScoreLabel.Name = "p2ScoreLabel";
-            this.p2ScoreLabel.Size = new System.Drawing.Size(311, 78);
+            this.p2ScoreLabel.Size = new System.Drawing.Size(172, 78);
             this.p2ScoreLabel.TabIndex = 5;
             this.p2ScoreLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -81,9 +81,9 @@
             this.p1ScoreLabel.BackColor = System.Drawing.Color.Transparent;
             this.p1ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.p1ScoreLabel.ForeColor = System.Drawing.Color.White;
-            this.p1ScoreLabel.Location = new System.Drawing.Point(35, 348);
+            this.p1ScoreLabel.Location = new System.Drawing.Point(34, 333);
             this.p1ScoreLabel.Name = "p1ScoreLabel";
-            this.p1ScoreLabel.Size = new System.Drawing.Size(311, 78);
+            this.p1ScoreLabel.Size = new System.Drawing.Size(157, 78);
             this.p1ScoreLabel.TabIndex = 6;
             this.p1ScoreLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 

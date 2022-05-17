@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,77 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="endSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\609336__kenneth-cooney__completed.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gameSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\459814__matrixxx__alien-05.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="playerShip" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        Ae45trTBLDBCAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="startGameSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\361261__japanyoshithegamer__8-bit-spaceship-startup.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
