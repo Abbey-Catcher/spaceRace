@@ -63,18 +63,18 @@ namespace spaceRace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream endSound {
+        internal static System.IO.UnmanagedMemoryStream collisionSound {
             get {
-                return ResourceManager.GetStream("endSound", resourceCulture);
+                return ResourceManager.GetStream("collisionSound", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream gameSound {
+        internal static System.IO.UnmanagedMemoryStream endSound {
             get {
-                return ResourceManager.GetStream("gameSound", resourceCulture);
+                return ResourceManager.GetStream("endSound", resourceCulture);
             }
         }
         
@@ -85,6 +85,15 @@ namespace spaceRace.Properties {
             get {
                 object obj = ResourceManager.GetObject("playerShip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream pointSound {
+            get {
+                return ResourceManager.GetStream("pointSound", resourceCulture);
             }
         }
         

@@ -92,5 +92,11 @@
   <ItemGroup>
     <None Include="Resources\361261__japanyoshithegamer__8-bit-spaceship-startup.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\633248__aesterial-arts__arcade-die.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\412166__screamstudio__arcade-heal.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

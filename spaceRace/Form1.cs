@@ -167,18 +167,26 @@ namespace spaceRace
                 astroids[i] = new Rectangle(x, astroids[i].Y, 20, astroidSize);
             }
 
-            //if player reaches top of screen, reset position and add point
+            //if player reaches top of screen, reset position, add point, and play pointSound
             if (player1.Y == 0)
             {
                 player1.Y = this.Height - player1.Height;
                 p1Score++;
                 p1ScoreLabel.Text = $"{p1Score}";
+
+                //play point sound
+                SoundPlayer pointSound = new SoundPlayer(Properties.Resources.pointSound);
+                pointSound.Play();
             }
             else if (player2.Y == 0)
             {
                 player2.Y = this.Height - player2.Height;
                 p2Score++;
                 p2ScoreLabel.Text = $"{p2Score}";
+
+                //play point sound
+                SoundPlayer pointSound1 = new SoundPlayer(Properties.Resources.pointSound);
+                pointSound1.Play();
             }
 
             //check to see if a new astroid should be created 
@@ -213,10 +221,18 @@ namespace spaceRace
                 if (player1.IntersectsWith(astroids[i]))
                 {
                     player1.Y = this.Height - player1.Height;
+
+                    //play death sound
+                    SoundPlayer deathSound = new SoundPlayer(Properties.Resources.collisionSound);
+                    deathSound.Play();
                 }
                 else if (player2.IntersectsWith(astroids[i]))
                 {
                     player2.Y = this.Height - player2.Height;
+
+                    //play death sound
+                    SoundPlayer deathSound1 = new SoundPlayer(Properties.Resources.collisionSound);
+                    deathSound1.Play();
                 }
             }
 
